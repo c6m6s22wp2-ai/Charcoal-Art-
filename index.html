@@ -445,8 +445,18 @@ function closeModalDirect(){ document.getElementById('modal').classList.remove('
 function handlePurchase(){
   var a=S.artworks.find(function(x){return x.id===currentId;});
   closeModalDirect();
-  showToast('Thanks for your interest in "'+a.title+'" - scroll down to send an inquiry!');
-  setTimeout(function(){ document.getElementById('commission').scrollIntoView({behavior:'smooth'}); },600);
+  var body=[
+    'I am interested in purchasing this original artwork:',
+    '',
+    'Artwork: '+a.title,
+    'Medium: '+a.medium,
+    'Size: '+a.size,
+    'Price: $'+Number(a.price).toLocaleString(),
+    '',
+    'Please let me know if this piece is still available.'
+  ].join('\n');
+  window.location.href='mailto:sullivansilbiger@icloud.com?subject='+encodeURIComponent('Artwork Purchase Inquiry - '+a.title)+'&body='+encodeURIComponent(body);
+  showToast('Opening your email app...');
 }
 
 function openAdmin(){
