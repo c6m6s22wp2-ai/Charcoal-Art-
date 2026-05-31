@@ -222,12 +222,11 @@ footer a:hover { color: var(--cream); }
         <div class="form-group"><label>Email</label><input type="email" id="commissionEmail" placeholder="your@email.com"></div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label>Subject</label><select id="commissionSubject"><option>Pet Portrait</option><option>Horse Portrait</option><option>Wildlife</option><option>Human Portrait</option><option>Other</option></select></div>
-        <div class="form-group"><label>Budget</label><select id="commissionBudget"><option>$100-$200</option><option>$200-$400</option><option>$400-$600</option><option>$600+</option><option>Not sure yet</option></select></div>
+        <div class="form-group"><label>Canvas</label><select id="commissionCanvas"><option>White Paper</option><option>Wood</option></select></div>
       </div>
       <div class="form-group" style="margin-bottom:1rem">
-        <label>Tell me about your piece</label>
-        <textarea id="commissionDetails" placeholder="Describe what you have in mind..."></textarea>
+        <label>Tell me about your piece and add a reference photo</label>
+        <textarea id="commissionDetails" placeholder="Describe what you have in mind. Add a reference photo in your email before sending."></textarea>
       </div>
       <button class="form-submit" onclick="handleCommission()">Send Inquiry</button>
     </div>
@@ -652,19 +651,19 @@ function handleImport(event){
 function handleCommission(){
   var name=document.getElementById('commissionName').value.trim();
   var email=document.getElementById('commissionEmail').value.trim();
-  var subject=document.getElementById('commissionSubject').value;
-  var budget=document.getElementById('commissionBudget').value;
+  var canvas=document.getElementById('commissionCanvas').value;
   var details=document.getElementById('commissionDetails').value.trim();
   var body=[
     'Name: '+(name||'Not provided'),
     'Email: '+(email||'Not provided'),
-    'Subject: '+subject,
-    'Budget: '+budget,
+    'Canvas: '+canvas,
     '',
     'Commission details:',
-    details||'Not provided'
+    details||'Not provided',
+    '',
+    'Please attach a reference photo before sending this email.'
   ].join('\n');
-  window.location.href='mailto:sullivansilbiger@icloud.com?subject='+encodeURIComponent('Commission Inquiry - '+subject)+'&body='+encodeURIComponent(body);
+  window.location.href='mailto:sullivansilbiger@icloud.com?subject='+encodeURIComponent('Commission Inquiry - '+canvas)+'&body='+encodeURIComponent(body);
   showToast('Opening your email app...');
 }
 
